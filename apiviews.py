@@ -22,9 +22,7 @@ class DepartmentshipRequestViewSet(CacheResponseMixin, viewsets.ModelViewSet):
 
     queryset = DepartmentshipRequest.objects.all()
     serializer_class = DepartmentshipRequestModelSerializer
-    paginate_by = 15
-    paginate_by_param = 'page_size'
-    max_paginate_by = 100
+    permission_classes = (permissions.IsAuthenticated,)
 
 
 
@@ -91,6 +89,7 @@ class DepartmentshipRequestCreateAPI(generics.ListCreateAPIView):
     queryset = DepartmentshipRequest.objects.all()
     model = DepartmentshipRequest
     serializer_class = DepartmentshipRequestModifyModelSerializer
+    permission_classes = (permissions.IsAuthenticated, )
 
     paginate_by = 15
     paginate_by_param = 'page_size'
@@ -108,17 +107,20 @@ class DepartmentshipRequestCreateAPI(generics.ListCreateAPIView):
 class DeaprtmentshipRequestDetailAPI(generics.RetrieveUpdateDestroyAPIView):
     model = DepartmentshipRequest
     serializer_class = DepartmentshipRequestModelSerializer
+    permission_classes = (permissions.IsAuthenticated, )
 
 
 class DepartmentGroupUserCreateAPI(generics.CreateAPIView):
     model = DepartmentGroupUser
     serializer_class = DepartmentGroupUserModelCreateSerializer
+    permission_classes = (permissions.IsAuthenticated, )
 
 
 
 class DepartmentGroupUserListAPI( generics.ListAPIView):
     model = DepartmentGroupUser
     serializer_class = DepartmentGroupUserModelSerializer
+    permission_classes = (permissions.IsAuthenticated, )
 
     paginate_by = 15
     paginate_by_param = 'page_size'
@@ -129,12 +131,14 @@ class DepartmentGroupUserListAPI( generics.ListAPIView):
 class DepartmentGroupUserDetailAPI(generics.RetrieveUpdateDestroyAPIView):
     model = DepartmentGroupUser
     serializer_class = DepartmentGroupUserModelSerializer
+    permission_classes = (permissions.IsAuthenticated, )
 
 
 
 class DepartmentGroupCreateAPI(generics.CreateAPIView):
     model = DepartmentGroup
     serializer_class = DepartmentGroupModelSerializer
+    permission_classes = (permissions.IsAuthenticated, )
 
     def pre_save(self, obj):
         obj.user = self.request.user
@@ -145,6 +149,7 @@ class DepartmentGroupCreateAPI(generics.CreateAPIView):
 class DepartmentGroupListAPI(generics.ListAPIView):
     model = DepartmentGroup
     serializer_class = DepartmentGroupModelSerializer
+    permission_classes = (permissions.IsAuthenticated, )
 
     paginate_by = 15
     paginate_by_param = 'page_size'
@@ -154,6 +159,7 @@ class DepartmentGroupListAPI(generics.ListAPIView):
 class DepartmentGroupDetailAPI(generics.RetrieveUpdateDestroyAPIView):
     model = DepartmentGroup
     serializer_class = DepartmentGroupModelSerializer
+    permission_classes = (permissions.IsAuthenticated, )
 
 
 class UserDepartmentGroupAPI(generics.ListAPIView):
@@ -161,6 +167,7 @@ class UserDepartmentGroupAPI(generics.ListAPIView):
 
     model = DepartmentGroupUser
     serializer_class = DepartmentGroupUserModelSerializer
+    permission_classes = (permissions.IsAuthenticated, )
 
     def get_queryset(self):
 
